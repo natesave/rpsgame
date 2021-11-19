@@ -1,74 +1,47 @@
-function computerPlay() {
+function computerPlay() { //randomly chooses rock, paper or scissors for computer selection
     let computerChoices = ["rock", "paper", "scissors"]
     const randomChoice = computerChoices[Math.floor(Math.random()*computerChoices.length)];
+    console.log("The computer chose the weapon " + randomChoice + ".");
     return randomChoice;
 }
 
-let computerSelection = computerPlay();
-console.log("The computer played: " + computerSelection);
+let playerWin = 0;
+let computerWin = 0;
 
-var playerWin = 0
-var computerWin = 0
+function playRound(playerSelection, ) { //checks computer selection against player selection for one round
+    
+    let computerSelection = computerPlay();
 
-
-
-function game() {
-
-let playerInput = prompt("Let's play rock, paper, scissors!");
-let playerChoice = playerInput.toLowerCase();
-
-function playerPlay(playerChoice) {
-    if (playerChoice == "rock" || playerChoice == "paper" || playerChoice == "scissors") {
-        return playerChoice;
+    if (playerSelection == "rock" && computerSelection == "scissors") {
+        playerWin++;
+        console.log("You win this round! Rock beats scissors");
+    }  else if (playerSelection == "paper" && computerSelection == "rock") {
+        playerWin++;
+        console.log("You win this round! Paper beats rock");
+    } else if (playerSelection == "scissors" && computerSelection == "paper") {
+        playerWin++;
+        console.log("You win this round! Scissors beats paper");
+    } else if (playerSelection == "rock" && computerSelection == "paper") {
+        computerWin++;
+        console.log("You lose this round. Rock loses to paper");
+    } else if (playerSelection == "paper" && computerSelection == "scissors") {
+        computerWin++;
+        console.log("You lose this round. Paper loses to scissors");
+    } else if (playerSelection == "scissors" && computerSelection == "rock") {
+        computerWin++;
+        console.log("You lose this round. Scissors loses to rock");
     } else {
-        return "Invalid play";
-    }
+        console.log("It\'s a draw! Try again.");
+    } 
 }
 
-let playerSelection = playerPlay(playerChoice);
-console.log("You played: " + playerPlay(playerChoice));
-    
-    if (playerWin < 5 || computerWin < 5) {
-        playRound(playerSelection, computerSelection);
-    } else {
-        return "Game over.";
-    }
+let rock = document.getElementById('rockBtn');
+rock.addEventListener('click', () => playRound("rock", ));
 
-        function playRound(playerSelection, computerSelection) {
-            if (playerSelection == "rock" && computerSelection == "scissors") {
-                playerWin++;
-                return "You win! Rock beats scissors";
-            }  else if (playerSelection == "paper" && computerSelection == "rock") {
-                playerWin++;
-                return "You win! Paper beats rock";
-            } else if (playerSelection == "scissors" && computerSelection == "paper") {
-                playerWin++;
-                return "You win! Scissors beats paper";
-            } else if (playerSelection == "rock" && computerSelection == "paper") {
-                computerWin++;
-                return "You lose. Rock loses to paper";
-            } else if (playerSelection == "paper" && computerSelection == "scissors") {
-                computerWin++;
-                return "You lose. Paper loses to scissors";
-            } else if (playerSelection == "scissors" && computerSelection == "rock") {
-                computerWin++;
-                return "You lose. Scissors loses to rock";
-            } else {
-                return "It\'s a draw! Try again.";
-            } 
-        }
-    }
+let paper = document.getElementById('paperBtn');
+paper.addEventListener('click', () => playRound("paper", ));
 
-console.log(game());
-console.log("Wins: " + playerWin + ", Losses:" + computerWin);
+let scissors = document.getElementById('scissorsBtn');
+scissors.addEventListener('click', () => playRound("scissors", ));
 
-console.log(game());
-console.log("Wins: " + playerWin + ", Losses:" + computerWin);
 
-console.log(game());
-console.log("Wins: " + playerWin + ", Losses:" + computerWin);
-
-console.log(game());
-console.log("Wins: " + playerWin + ", Losses:" + computerWin);
-console.log(game());
-console.log("Wins: " + playerWin + ", Losses:" + computerWin);
