@@ -9,16 +9,39 @@
 </head>
 <body>
     <h1>Rock, Paper, Scissors Duel</h1>
-    <h2 id="btns">Choose your weapon:</h2>
-        <button id="rockBtn">Rock</button>
-        <button id="paperBtn">Paper</button>
-        <button id="scissorsBtn">Scissors</button>
-    <div id="results"></div>
-        <div>Wins:</div>
-        <div id="wins">0</div>
-        <div>Losses:</div>
-        <div id="losses">0</div>
-    <button id="reset">Reset Game</button>
+    <div id="container">
+        <div id="player">
+            <div id="pTitle">Click to choose your weapon:</div>
+            <div id="btns">
+                <button type=submit id="rockBtn"><img src="images/stone-axe3.png"></button>
+                <button type=submit id="paperBtn"><img src="images/paper1.png"></button>
+                <button type=submit id="scissorsBtn"><img src="images/scissors1.png"></button>
+            </div>
+            <div id="pWeapon">Your weapon:</div>
+        </div>
+        <div id="npc"> 
+            <div id="npcTitle">Computer Player's Weapon:</div>
+            <div id="imgs">
+                <img id="img1" src="images/stone-axe3.png">
+                <img id="img2" src="images/paper1.png">
+                <img id="img3" src="images/scissors1.png">    
+            </div>
+            <div id="npcWeapon">The computer's weapon:</div>
+        </div>        
+    </div>
+    <div id="resultsContainer"> Results
+        <div id="roundResults">Round Results</div>
+        <div id="score"> 
+            <div>Wins:</div>
+            <div id="wins">0</div>
+            <div>Losses:</div>
+            <div id="losses">0</div>
+        </div>
+        <div id="gameResult">-</div>
+        <div id="reset">
+            <button id="resetB">Reset Game</button>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
