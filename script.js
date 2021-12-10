@@ -4,79 +4,158 @@ function computerPlay() { //randomly chooses rock, paper or scissors for compute
     return randomChoice;
 }
 
+let rock = document.getElementById('rockBtn');
+let paper = document.getElementById('paperBtn');
+let scissors = document.getElementById('scissorsBtn');
+
+let pcRock = document.getElementById('rock');
+let pcPaper = document.getElementById('paper');
+let pcScissors = document.getElementById('scissors');
+
+function animatePC(x) {
+    if (x == "rock") {
+        pcRock.style.backgroundColor = "rgb(124, 165, 255)";
+        pcPaper.style.backgroundColor = "rgb(239, 239, 239)";
+        pcScissors.style.backgroundColor = "rgb(239, 239, 239)";
+    } else if (x == "paper") {
+        pcRock.style.backgroundColor = "rgb(239, 239, 239)";
+        pcPaper.style.backgroundColor = "rgb(124, 165, 255)";
+        pcScissors.style.backgroundColor = "rgb(239, 239, 239)";
+    } else if (x == "scissors") {
+        pcRock.style.backgroundColor = "rgb(239, 239, 239)";
+        pcPaper.style.backgroundColor = "rgb(239, 239, 239)";
+        pcScissors.style.backgroundColor = "rgb(124, 165, 255)";
+    };
+};
+
 //score counter for each round
 let playerWin = document.querySelector('#wins');
 let computerWin = document.querySelector('#losses');
 
-function playRound(playerSelection, ) { //checks computer selection against player selection for one round
-    
-    let computerSelection = computerPlay();
-    let gametext = document.querySelector('#gameResult');
+let comptext = document.querySelector('#npcWeapon'); //shows what the computer played
+let playertext = document.querySelector('#pWeapon'); //shows what player played
+let gametext = document.querySelector('#roundResults'); //shows result of round
 
-    if (Number(playerWin.textContent) < 5 && Number(computerWin.textContent) < 5) {  
-        let comptext = document.querySelector('#npcWeapon'); //shows what the computer played
-        comptext.textContent = "The computer's weapon: " + computerSelection;
-        let playertext = document.querySelector('#pWeapon'); //shows what player played
-        playertext.textContent = "Your weapon: " + playerSelection;
-        let resulttext = document.querySelector('#roundResults'); //shows result of round
+//Player round with player's selection after click and animates selection
+let playerSelection = "";
 
-        if (playerSelection == "rock" && computerSelection == "scissors") {
-            playerWin.textContent = Number(playerWin.textContent) + 1;
-            resulttext.textContent = "You win this round! Rock beats scissors.";
-            document.getElementById('rockBtn').style.backgroundColor = "red";
-            document.getElementById('img3').style.backgroundColor = "red";
-        }  else if (playerSelection == "paper" && computerSelection == "rock") {
-            playerWin.textContent = Number(playerWin.textContent) + 1;
-            resulttext.textContent = "You win this round! Paper beats rock.";
-            document.getElementById('paperBtn').style.backgroundColor = "red";
-            document.getElementById('img1').style.backgroundColor = "red";
-        } else if (playerSelection == "scissors" && computerSelection == "paper") {
-            playerWin.textContent = Number(playerWin.textContent) + 1;
-            resulttext.textContent = "You win this round! Scissors beats paper.";
-            document.getElementById('scissorsBtn').style.backgroundColor = "red";
-            document.getElementById('img2').style.backgroundColor = "red";
-        } else if (playerSelection == "rock" && computerSelection == "paper") {
-            computerWin.textContent = Number(computerWin.textContent) + 1;
-            resulttext.textContent = "You lose this round. Rock loses to paper.";
-            document.getElementById('rockBtn').style.backgroundColor = "red";
-            document.getElementById('img2').style.backgroundColor = "red";
-        } else if (playerSelection == "paper" && computerSelection == "scissors") {
-            computerWin.textContent = Number(computerWin.textContent) + 1;
-            resulttext.textContent = "You lose this round. Paper loses to scissors.";
-            document.getElementById('paperBtn').style.backgroundColor = "red";
-            document.getElementById('img3').style.backgroundColor = "red";
-        } else if (playerSelection == "scissors" && computerSelection == "rock") {
-            computerWin.textContent = Number(computerWin.textContent) + 1;
-            resulttext.textContent = "You lose this round. Scissors loses to rock.";
-            document.getElementById('scissorsBtn').style.backgroundColor = "red";
-            document.getElementById('img1').style.backgroundColor = "red";
-        } else {
-            resulttext.textContent = "It\'s a draw! Try again.";
-        } 
-    } else if (Number(playerWin.textContent) == 5) { //shows result of game, best out of 5
-        gametext.textContent = "Congratulations, you won! You're the best!";
-        return;
-    } else {
-        gametext.textContent = "Game over. You lost.";
-        return;
-    }
+rock.addEventListener('click', () => {
+    playRound('rock');
+    rock.style.backgroundColor = "rgb(124, 165, 255)";
+    paper.style.backgroundColor = "rgb(239, 239, 239)";
+    scissors.style.backgroundColor = "rgb(239, 239, 239)";
+});
+
+paper.addEventListener('click', () => {
+    playRound('paper');
+    rock.style.backgroundColor = "rgb(239, 239, 239)";
+    paper.style.backgroundColor = "rgb(124, 165, 255)";
+    scissors.style.backgroundColor = "rgb(239, 239, 239)";
+});
+
+scissors.addEventListener('click', () => {
+    playRound('scissors');
+    rock.style.backgroundColor = "rgb(239, 239, 239)";
+    paper.style.backgroundColor = "rgb(239, 239, 239)";
+    scissors.style.backgroundColor = "rgb(124, 165, 255)";
+});
+
+function checkScore() {
+    if (Number(playerWin.textContent) == 5) { //shows result of game, best out of 5
+        win();
+    } else if (Number(computerWin.textContent) == 5){
+        lose();
+    };
+};
+
+let pTrophy = document.getElementById("playerWin");
+let pFlag = document.getElementById("playerLose");
+let pcTrophy = document.getElementById("pcWin");
+let pcFlag = document.getElementById("pcLose");
+
+function win() {
+    gametext.textContent = "Congratulations, you won! You're the best!";
+    gametext.style.color = "green";
+    rock.style.display = "none";
+    paper.style.display = "none";
+    scissors.style.display = "none";
+    pcRock.style.display = "none";
+    pcPaper.style.display = "none";
+    pcScissors.style.display = "none";
+    pTrophy.style.display = "block";
+    pcFlag.style.display = "block";
 }
 
-let rock = document.getElementById('rockBtn');
-rock.addEventListener('click', () => playRound("rock", ));
+function lose() {
+    gametext.textContent = "Game over. You lost.";
+    gametext.style.color = "red";
+    rock.style.display = "none";
+    paper.style.display = "none";
+    scissors.style.display = "none";
+    pcRock.style.display = "none";
+    pcPaper.style.display = "none";
+    pcScissors.style.display = "none";
+    pFlag.style.display = "block";
+    pcTrophy.style.display = "block";
+}
 
-let paper = document.getElementById('paperBtn');
-paper.addEventListener('click', () => playRound("paper", ));
-
-let scissors = document.getElementById('scissorsBtn');
-scissors.addEventListener('click', () => playRound("scissors", ));
+function playRound(playerSelection, ) { //checks computer selection against player selection for one round
+    let computerSelection = computerPlay();
+    animatePC(computerSelection);
+    comptext.textContent = "The computer's weapon: " + computerSelection;
+    playertext.textContent = "Your weapon: " + playerSelection;
+            if (playerSelection == "rock" && computerSelection == "scissors") {
+                playerWin.textContent = Number(playerWin.textContent) + 1;
+                gametext.textContent = "You win this round! Rock beats scissors.";
+                checkScore();
+            } else if (playerSelection == "paper" && computerSelection == "rock") {
+                playerWin.textContent = Number(playerWin.textContent) + 1;
+                gametext.textContent = "You win this round! Paper beats rock.";
+                checkScore();
+            } else if (playerSelection == "scissors" && computerSelection == "paper") {
+                playerWin.textContent = Number(playerWin.textContent) + 1;
+                gametext.textContent = "You win this round! Scissors beats paper.";
+                checkScore();
+            } else if (playerSelection == "rock" && computerSelection == "paper") {
+                computerWin.textContent = Number(computerWin.textContent) + 1;
+                gametext.textContent = "You lose this round. Rock loses to paper.";
+                checkScore();
+            } else if (playerSelection == "paper" && computerSelection == "scissors") {
+                computerWin.textContent = Number(computerWin.textContent) + 1;
+                gametext.textContent = "You lose this round. Paper loses to scissors.";
+                checkScore();
+            } else if (playerSelection == "scissors" && computerSelection == "rock") {
+                computerWin.textContent = Number(computerWin.textContent) + 1;
+                gametext.textContent = "You lose this round. Scissors loses to rock.";
+                checkScore();
+            } else {
+                gametext.textContent = "It\'s a draw! Try again.";
+            };
+};
 
 //the code below is for the reset button
 let resetBtn = document.querySelector('#resetB');
-
 function reset() {
     playerWin.textContent = 0;
     computerWin.textContent = 0;
+    gametext.textContent = "Best out of 5";
+    gametext.style.color = "black";
+    rock.style.backgroundColor = "rgb(239, 239, 239)";
+    paper.style.backgroundColor = "rgb(239, 239, 239)";
+    scissors.style.backgroundColor = "rgb(239, 239, 239)";
+    pcRock.style.backgroundColor = "rgb(239, 239, 239)";
+    pcPaper.style.backgroundColor = "rgb(239, 239, 239)";
+    pcScissors.style.backgroundColor = "rgb(239, 239, 239)";
+    rock.style.display = "block";
+    paper.style.display = "block";
+    scissors.style.display = "block";
+    pcRock.style.display = "block";
+    pcPaper.style.display = "block";
+    pcScissors.style.display = "block";
+    pFlag.style.display = "none";
+    pTrophy.style.display = "none";
+    pcFlag.style.display = "none";
+    pcTrophy.style.display = "none";
 }
 
 resetBtn.addEventListener('click', reset);
