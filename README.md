@@ -1,3 +1,2 @@
 # rpsgame
-This project is from the online web development course The Odin Project.
-The goal is to create a JavaScript file that will take a player's input (rock, paper or scissors) and will play against a computer that randomly picks one of the three choices.
+The goal is to create a web page for the game rock, paper, scissors. A user selects one of the three options and plays against a computer that randomly selects one of the three choices.
